@@ -1,8 +1,14 @@
 var React = require('react');
+var uuid = require('node-uuid');
+
+
 var ToDoList = require('ToDoList');
 var ToDoForm = require('ToDoForm');
 var ToDoSearch = require('ToDoSearch');
-var uuid = require('node-uuid');
+var ToDoAPI = require('ToDoAPI');
+
+
+
 
 var ToDoApp = React.createClass({
 
@@ -11,30 +17,11 @@ var ToDoApp = React.createClass({
     return {
       showCompleted: false,
       searchText: '',
-      todos: [
-        {
-          id: uuid(),
-          text: 'Walk the dog',
-          completed: true
-        },
-        {
-          id: uuid(),
-          text: 'Wash the dishes',
-          completed: false
-        },
-        {
-          id: uuid(),
-          text: 'Get chicken',
-          completed: true
-        },
-        {
-          id: uuid(),
-          text: 'Fold the laundry',
-          completed: false
-        }
-      ]
-
+      todos: ToDoAPI.getToDos()
     };
+  },
+  componentDidUpdate: function () {
+    ToDoAPI.setToDos(this.state.todos);
   },
   handleAddToDo: function (text) {
   var that = this;
@@ -70,11 +57,13 @@ var ToDoApp = React.createClass({
 
   },
 render: function () {
-  var {todos} = this.state;
+  var {todos, showCompleted, searchText} = this.state;
+  var filteredToDos = ToDoAPI.filterToDos(todos, showCompleted, searchText);
+
 return (
   <div>
     <ToDoSearch onSearch={this.handleSearch}/>
-    <ToDoList todos={todos} onToggle={this.handleToggle}/>
+    <ToDoList todos={filteredToDos} onToggle={this.handleToggle}/>
     <ToDoForm onItemSubmit={this.handleAddToDo}/>
   </div>
 )
