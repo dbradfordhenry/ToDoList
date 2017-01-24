@@ -14,15 +14,18 @@ describe('ToDoList', () => {
   it ('should render one ToDo component for each todo item', () => {
     var todos = [{
       id: 1,
-      text: 'Do something'
+      text: 'Do something',
+      completed: false
     },
     {
       id: 2,
-      text: 'Do something else'
+      text: 'Do something else',
+      completed: true
     },
     {
       id: 3,
-      text: 'Do yet another thing'
+      text: 'Do yet another thing',
+      completed: false
     }];
     var toDoList = TestUtils.renderIntoDocument(<ToDoList todos={todos}/>);
     var toDosComponents = TestUtils.scryRenderedComponentsWithType(toDoList, ToDo);
