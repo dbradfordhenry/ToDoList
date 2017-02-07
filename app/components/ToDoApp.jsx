@@ -38,6 +38,7 @@ var ToDoApp = React.createClass({
     ]
   });
 
+  
     // alert('new item: ' + text);
   },
   handleSearch: function (showCompleted, searchText) {
