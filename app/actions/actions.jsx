@@ -20,6 +20,10 @@ export var addToDo = (text) => {
     type: 'ADD_TODO',
     text
   };
-
-
+};
+export var addToDos = (todos) => {
+  return {
+    type: 'ADD_TODOS',
+    todos
+  };
 };

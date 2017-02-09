@@ -4,7 +4,8 @@ var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 var $ = require('jQuery');
 
-var ToDoSearch = require('ToDoSearch');
+// var ToDoSearch = require('ToDoSearch');
+import {ToDoSearch} from 'ToDoSearch';
 
 describe('ToDoSearch', () => {
   it('should exist', () => {

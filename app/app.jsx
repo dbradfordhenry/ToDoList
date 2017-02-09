@@ -11,14 +11,17 @@ var ToDoApp = require ('ToDoApp');
 
 var actions = require('actions');
 var store = require('configureStore').configure();
+var ToDoAPI = require('ToDoAPI');
 
 store.subscribe(() => {
+	var state = store.getState();
 	console.log('New state', store.getState());
+	ToDoAPI.setToDos(state.todos);
+
 });
 
-store.dispatch(actions.addToDo('clean the yard'));
-store.dispatch(actions.setSearchText('yard'));
-store.dispatch(actions.toggleShowCompleted());
+var initialToDos = ToDoAPI.getToDos();
+store.dispatch(actions.addToDos(initialToDos));
 
 //Load foundations
 $(document).foundation();
